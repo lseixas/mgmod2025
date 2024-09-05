@@ -15,8 +15,9 @@ public class ModItemGroups {
             Identifier.of(MineguerraMod.MOD_ID, "mg_ingots_tab"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.V1N3X))
                     .displayName(Text.translatable("itemgroup.mgmod.mg_ingots_tab"))
-                    .entries((displayContext, entries) -> {
-                        entries.add(ModItems.DIAMANITE); //ADD ITEMS HERE TO REGISTER IN THE TAB
+                    .entries((displayContext, entries) -> {   //ADD ITEMS HERE TO REGISTER IN THE TAB
+                        entries.add(ModItems.DIAMANITE);
+                        entries.add(ModItems.NETHERDIAMOND);
                     })
                     .build());
 

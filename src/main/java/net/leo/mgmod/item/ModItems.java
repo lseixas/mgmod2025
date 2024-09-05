@@ -12,6 +12,8 @@ public class ModItems {
 
     public static final Item DIAMANITE = registerItem("diamanite", new Item(new Item.Settings()));
     public static final Item V1N3X = registerItem("v1n3x", new Item(new Item.Settings()));
+    public static final Item NETHERDIAMOND = registerItem("nether_diamond", new Item(new Item.Settings()));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MineguerraMod.MOD_ID, name), item);
@@ -23,6 +25,7 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(DIAMANITE);
             entries.add(V1N3X);
+            entries.add(NETHERDIAMOND);
         });
     }
 }
