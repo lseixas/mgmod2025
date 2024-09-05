@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "mgmod",
+	"version": "${version}",
+	"name": "MineguerraMod",
+	"description": "MOD PRO MINIGUERRA 2025",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/mgmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.leo.mgmod.MineguerraMod"
+		],
+		"fabric-datagen": [
+			"net.leo.mgmod.MineguerraModDataGenerator"
+		],
+		"client": [
+			"net.leo.mgmod.MineguerraModClient"
+		]
+	},
+	"mixins": [
+		"mgmod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.4",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
