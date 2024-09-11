@@ -18,6 +18,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {   //ADD ITEMS HERE TO REGISTER IN THE TAB
                         entries.add(ModItems.DIAMANITE);
                         entries.add(ModItems.NETHERDIAMOND);
+                        entries.add(ModItems.AURA_DETECTOR);
                     })
                     .build());
 
