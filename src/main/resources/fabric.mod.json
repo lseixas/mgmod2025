@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"net.leo.mgmod.MineguerraModClient"
+		],
+		"cardinal-components": [
+			"net.leo.mgmod.components.aura.MyComponents"
 		]
 	},
 	"mixins": [
