@@ -1,5 +1,6 @@
 package net.leo.mgmod.components.aura_as;
 
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.Identifier;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistryV3;
@@ -16,6 +17,7 @@ public class MyComponents implements EntityComponentInitializer, WorldComponentI
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerForPlayers(AURA_COMPONENT_AS, player -> new TotalAuraComponentAS(), RespawnCopyStrategy.NEVER_COPY);
+        registry.registerFor(ArmorStandEntity.class, AURA_COMPONENT_AS, armorStand -> new TotalAuraComponentAS());
     }
 
     @Override

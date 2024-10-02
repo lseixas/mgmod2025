@@ -22,6 +22,8 @@ public interface AuraComponentAS extends ComponentV3 {
 
     void updateCurrentAura(float value);
 
+    float calculateTrueAuraAS(World world, ArmorStandEntity fakePlayer);
+
     float calculateTrueAura(World world, PlayerEntity player);
 
     float calculateCurrentAura(World world, PlayerEntity player, ArmorStandEntity fakePlayer);
@@ -42,13 +44,25 @@ class TotalAuraComponentAS implements AuraComponentAS {
 
     @Override public void updateCurrentAura(float value) { this.current_aura = value; }
 
+    @Override public float calculateTrueAuraAS(World world, ArmorStandEntity fakePlayer) {
+        float total = 0.0f;
+        for (ItemStack armorStack : fakePlayer.getArmorItems()) {
+            if (armorStack.getItem() instanceof ArmorItem armorItem) {
+                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
+                    total += 1.5f;
+                }
+            }
+        }
+        return total;
+    }
+
     @Override public float calculateTrueAura(World world, PlayerEntity player) {
         float total = 0.0f;
         for (ItemStack armorStack : player.getArmorItems()) {
             if (armorStack.getItem() instanceof ArmorItem armorItem) {
                 if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
                     // If it's diamond armor, increment the aura counter
-                    total++;
+                    total += 1.5f;
                 }
             }
         }
@@ -62,7 +76,7 @@ class TotalAuraComponentAS implements AuraComponentAS {
         for (ItemStack armorStack : fakePlayer.getArmorItems()) {
             if(armorStack.getItem() instanceof ArmorItem armorItem) {
                 if(armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //change to netherdiamond
-                    total--;
+                    total -= 1.5f;
                 }
             }
         }

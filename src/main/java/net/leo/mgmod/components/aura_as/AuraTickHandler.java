@@ -10,6 +10,8 @@ import net.minecraft.util.math.Box;
 
 import java.util.List;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
 import static net.leo.mgmod.components.aura_as.MyComponents.AURA_COMPONENT_AS;
 
 public class AuraTickHandler {
@@ -22,24 +24,41 @@ public class AuraTickHandler {
                 // Iterate through all players in the world
                 for (ServerPlayerEntity player : world.getPlayers()) {
 
-                    Box box = new Box(player.getX() - 10, player.getY() - 10, player.getZ() - 10,
-                            player.getX() + 10, player.getY() + 10, player.getZ() + 10);
+                    float trueAuraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
+                    player.getComponent(AURA_COMPONENT_AS).updateTrueAura(trueAuraValue);
 
-                    List<ArmorStandEntity> nearAS = world.getEntitiesByClass(ArmorStandEntity.class, box, armorStand -> true);
+                    float max_aura_radius = 8;
+
+                    Box near_as_box = new Box(player.getX() - max_aura_radius, player.getY() - max_aura_radius, player.getZ() - max_aura_radius,
+                            player.getX() + max_aura_radius, player.getY() + max_aura_radius, player.getZ() + max_aura_radius);
+
+                    List<ArmorStandEntity> nearAS = world.getEntitiesByClass(ArmorStandEntity.class, near_as_box, armorStand -> true);
 
                     if(nearAS.isEmpty()) {
-                        float auraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
-                        player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue);
+                        System.out.println("Not detecting");
+                        player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(trueAuraValue);
                     }
 
-                    for(ArmorStandEntity fakePlayer : world.getEntitiesByClass(ArmorStandEntity.class, box, armorStand -> true)) {
+                    for(ArmorStandEntity fakePlayer : nearAS) {
+                        System.out.println("Detecting");
+                        float fake_player_true_aura_value = fakePlayer.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS(world, fakePlayer);
+                        fakePlayer.getComponent(AURA_COMPONENT_AS).updateTrueAura(fake_player_true_aura_value);
                         // Perform the aura calculation and update the player's aura component
 
-                        float currentAuraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
-                        player.getComponent(AURA_COMPONENT_AS).updateTrueAura(currentAuraValue);
+                        if(fakePlayer.getComponent(AURA_COMPONENT_AS).getTrueAura() <= player.distanceTo(fakePlayer)) {
+                            System.out.println("Not reaching");
+                            float auraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
+                            player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue);
+                        }
 
-                        float auraValue = player.getComponent(AURA_COMPONENT_AS).calculateCurrentAura(world, player, fakePlayer);
-                        player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue); //auraValue
+                        else {
+                            System.out.println("Reaching");
+                            float currentAuraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
+                            player.getComponent(AURA_COMPONENT_AS).updateTrueAura(currentAuraValue);
+
+                            float auraValue = player.getComponent(AURA_COMPONENT_AS).calculateCurrentAura(world, player, fakePlayer);
+                            player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue); //auraValue
+                        }
 
                         // Sync the component to ensure the aura value is updated on the client
                         MyComponents.AURA_COMPONENT_AS.sync(player);
