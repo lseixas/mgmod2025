@@ -2,7 +2,7 @@ package net.leo.mgmod;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.leo.mgmod.components.aura_player.AuraTickHandler;
+import net.leo.mgmod.components.aura_as.AuraTickHandler;
 import net.leo.mgmod.item.ModItemGroups;
 import net.leo.mgmod.item.ModItems;
 

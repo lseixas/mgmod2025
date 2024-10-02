@@ -25,7 +25,8 @@
 			"net.leo.mgmod.MineguerraModClient"
 		],
 		"cardinal-components": [
-			"net.leo.mgmod.components.aura.MyComponents"
+			"net.leo.mgmod.components.aura_player.MyComponents",
+			"net.leo.mgmod.components.aura_as.MyComponents"
 		]
 	},
 	"mixins": [
@@ -42,7 +43,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"mgmod:aura_component"
+			"mgmod:aura_component",
+			"mgmod:aura_component_as"
 		]
 	}
 }

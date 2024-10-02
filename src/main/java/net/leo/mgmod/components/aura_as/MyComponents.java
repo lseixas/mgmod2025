@@ -10,16 +10,16 @@ import org.ladysnake.cca.api.v3.world.WorldComponentFactoryRegistry;
 import org.ladysnake.cca.api.v3.world.WorldComponentInitializer;
 
 public class MyComponents implements EntityComponentInitializer, WorldComponentInitializer {
-    public static final ComponentKey<AuraComponent> AURA_COMPONENT =
-            ComponentRegistryV3.INSTANCE.getOrCreate(Identifier.of("mgmod:aura_component"), AuraComponent.class);
+    public static final ComponentKey<AuraComponentAS> AURA_COMPONENT_AS =
+            ComponentRegistryV3.INSTANCE.getOrCreate(Identifier.of("mgmod:aura_component_as"), AuraComponentAS.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerForPlayers(AURA_COMPONENT, player -> new TotalAuraComponent(), RespawnCopyStrategy.NEVER_COPY);
+        registry.registerForPlayers(AURA_COMPONENT_AS, player -> new TotalAuraComponentAS(), RespawnCopyStrategy.NEVER_COPY);
     }
 
     @Override
     public void registerWorldComponentFactories(WorldComponentFactoryRegistry registry) {
-        registry.register(AURA_COMPONENT, world -> new TotalAuraComponent());
+        registry.register(AURA_COMPONENT_AS, world -> new TotalAuraComponentAS());
     }
 }

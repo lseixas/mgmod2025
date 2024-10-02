@@ -8,7 +8,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
+import static net.leo.mgmod.components.aura_as.MyComponents.AURA_COMPONENT_AS;
 
 public class AuraDetectorItem extends Item {
     public AuraDetectorItem(Settings settings) {
@@ -21,9 +21,9 @@ public class AuraDetectorItem extends Item {
         if (!world.isClient()) {
             player.sendMessage(Text.literal("You used the item!"), false);
 
-            player.sendMessage(Text.literal("Your aura count currently is: " + player.getComponent(AURA_COMPONENT).getTrueAura()));
+            player.sendMessage(Text.literal("True Aura: " + player.getComponent(AURA_COMPONENT_AS).getTrueAura()));
 
-            player.sendMessage(Text.literal("nbt aura is: " + player.getComponent(AURA_COMPONENT).getTrueAura()));
+            player.sendMessage(Text.literal("Current Aura: " + player.getComponent(AURA_COMPONENT_AS).getCurrentAura()));
         }
 
         return TypedActionResult.success(itemStack);

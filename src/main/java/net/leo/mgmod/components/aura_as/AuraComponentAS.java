@@ -1,15 +1,16 @@
 package net.leo.mgmod.components.aura_as;
 
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterials;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.ladysnake.cca.api.v3.component.ComponentV3;
 
-import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
-
-public interface AuraComponent extends ComponentV3 {
+public interface AuraComponentAS extends ComponentV3 {
 
     void incrementTrueAura();
 
@@ -21,10 +22,12 @@ public interface AuraComponent extends ComponentV3 {
 
     void updateCurrentAura(float value);
 
-    float calculateAura(World world, PlayerEntity player);
+    float calculateTrueAura(World world, PlayerEntity player);
+
+    float calculateCurrentAura(World world, PlayerEntity player, ArmorStandEntity fakePlayer);
 }
 
-class TotalAuraComponent implements AuraComponent {
+class TotalAuraComponentAS implements AuraComponentAS {
 
     private float true_aura = 0;
     private float current_aura = 0;
@@ -39,20 +42,32 @@ class TotalAuraComponent implements AuraComponent {
 
     @Override public void updateCurrentAura(float value) { this.current_aura = value; }
 
-    @Override public float calculateAura(World world, PlayerEntity player) {
-
-        if (world instanceof ServerWorld serverWorld) {
-            float outside_aura = 0.0f;
-            for (PlayerEntity otherPlayer : serverWorld.getPlayers()) {
-
-                if (player.distanceTo(otherPlayer) < 3) { // < otherPlayer.maxAuraRadius
-                    outside_aura += otherPlayer.getComponent(AURA_COMPONENT).getTrueAura();
+    @Override public float calculateTrueAura(World world, PlayerEntity player) {
+        float total = 0.0f;
+        for (ItemStack armorStack : player.getArmorItems()) {
+            if (armorStack.getItem() instanceof ArmorItem armorItem) {
+                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
+                    // If it's diamond armor, increment the aura counter
+                    total++;
                 }
-
             }
-            return player.getComponent(AURA_COMPONENT).getTrueAura() - outside_aura;
         }
-        return player.getComponent(AURA_COMPONENT).getTrueAura();
+        return total;
+    }
+
+    @Override public float calculateCurrentAura(World world, PlayerEntity player, ArmorStandEntity fakePlayer) {
+
+        float total = this.getTrueAura();
+
+        for (ItemStack armorStack : fakePlayer.getArmorItems()) {
+            if(armorStack.getItem() instanceof ArmorItem armorItem) {
+                if(armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //change to netherdiamond
+                    total--;
+                }
+            }
+        }
+
+        return total;
     }
 
     @Override
