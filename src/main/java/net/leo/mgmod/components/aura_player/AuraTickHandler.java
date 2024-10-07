@@ -14,7 +14,7 @@ public class AuraTickHandler {
                 // Iterate through all players in the world
                 for (ServerPlayerEntity player : world.getPlayers()) {
                     // Perform the aura calculation and update the player's aura component
-                    float auraValue = player.getComponent(AURA_COMPONENT).calculateAura(world, player);
+                    float auraValue = player.getComponent(AURA_COMPONENT).calculateTrueAura(player);
                     player.getComponent(AURA_COMPONENT).updateTrueAura(auraValue); //auraValue
 
                     // Sync the component to ensure the aura value is updated on the client

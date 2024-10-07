@@ -1,6 +1,9 @@
 package net.leo.mgmod.components.aura_player;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterials;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
@@ -21,7 +24,10 @@ public interface AuraComponent extends ComponentV3 {
 
     void updateCurrentAura(float value);
 
-    float calculateAura(World world, PlayerEntity player);
+    float calculateTrueAura(PlayerEntity player);
+
+    float calculateCurrentAura(PlayerEntity player, PlayerEntity outsider);
+
 }
 
 class TotalAuraComponent implements AuraComponent {
@@ -39,20 +45,41 @@ class TotalAuraComponent implements AuraComponent {
 
     @Override public void updateCurrentAura(float value) { this.current_aura = value; }
 
-    @Override public float calculateAura(World world, PlayerEntity player) {
+    @Override
+    public float calculateTrueAura(PlayerEntity player) {
+        float total = 0.0f;
+        for (ItemStack armorStack : player.getArmorItems()) {
+            if (armorStack.getItem() instanceof ArmorItem armorItem) {
+                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //diamanite
+                    // If it's diamond armor, increment the aura counter
+                    total += 1.5f;
+                }
+                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //netherdiamond
+                    total -= 1.5f;
+                }
+            }
+        }
+        return total;
+    }
 
-        if (world instanceof ServerWorld serverWorld) {
-            float outside_aura = 0.0f;
-            for (PlayerEntity otherPlayer : serverWorld.getPlayers()) {
+    @Override
+    public float calculateCurrentAura(PlayerEntity player, PlayerEntity outsider) {
 
-                if (player.distanceTo(otherPlayer) < 3) { // < otherPlayer.maxAuraRadius
-                    outside_aura += otherPlayer.getComponent(AURA_COMPONENT).getTrueAura();
+        float total = this.getTrueAura();
+
+        for (ItemStack armorStack : outsider.getArmorItems()) {
+            if (armorStack.getItem() instanceof ArmorItem armorItem) {
+
+                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //change to diamanite
+                    total += 1.5f;
                 }
 
+                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //change to netherdiamond
+                    total -= 1.5f;
+                }
             }
-            return player.getComponent(AURA_COMPONENT).getTrueAura() - outside_aura;
         }
-        return player.getComponent(AURA_COMPONENT).getTrueAura();
+        return total;
     }
 
     @Override

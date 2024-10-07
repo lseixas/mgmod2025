@@ -24,6 +24,8 @@ public interface AuraComponentAS extends ComponentV3 {
 
     float calculateTrueAuraAS(World world, ArmorStandEntity fakePlayer);
 
+    float calculateCurrentAuraAS(PlayerEntity outsider);
+
     float calculateTrueAura(World world, PlayerEntity player);
 
     float calculateCurrentAura(World world, PlayerEntity player, ArmorStandEntity fakePlayer);
@@ -50,6 +52,24 @@ class TotalAuraComponentAS implements AuraComponentAS {
             if (armorStack.getItem() instanceof ArmorItem armorItem) {
                 if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
                     total += 1.5f;
+                }
+            }
+        }
+        return total;
+    }
+
+    @Override public float calculateCurrentAuraAS(PlayerEntity outsider) {
+        float total = this.getTrueAura();
+
+        for (ItemStack armorStack : outsider.getArmorItems()) {
+            if (armorStack.getItem() instanceof ArmorItem armorItem) {
+
+                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //change to diamanite
+                    total += 1.5f;
+                }
+
+                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //change to netherdiamond
+                    total -= 1.5f;
                 }
             }
         }

@@ -8,6 +8,8 @@ import net.leo.mgmod.item.ModItems;
 
 import net.leo.mgmod.particles.ModParticles;
 
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.PigEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -53,6 +53,7 @@ public class AuraTickHandler {
 
                         else {
                             System.out.println("Reaching");
+
                             float currentAuraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
                             player.getComponent(AURA_COMPONENT_AS).updateTrueAura(currentAuraValue);
 
