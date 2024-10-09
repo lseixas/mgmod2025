@@ -1,7 +1,11 @@
 package net.leo.mgmod.components.aura_as;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
@@ -13,56 +17,76 @@ import java.util.List;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static net.leo.mgmod.components.aura_as.MyComponents.AURA_COMPONENT_AS;
+import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
 
 public class AuraTickHandler {
-    public static void register() {
+    public static void onEquipmentChange(LivingEntity entity, EquipmentSlot slot, ItemStack oldStack, ItemStack newStack) {
+
+        System.out.println("Armor Changed");
+        if (entity instanceof ArmorStandEntity) {
+            if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
+                if(!oldStack.isEmpty() && newStack.isEmpty()) {
+                    float true_aura = entity.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS((ArmorStandEntity) entity);
+                    entity.getComponent(AURA_COMPONENT_AS).updateTrueAura(true_aura);
+                    System.out.println("Updated unequip");
+                }
+                else if (oldStack.isEmpty() && !newStack.isEmpty()) {
+                    float true_aura = entity.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS((ArmorStandEntity) entity);
+                    entity.getComponent(AURA_COMPONENT_AS).updateTrueAura(true_aura);
+                    System.out.println("Updated unequip");
+                }
+            }
+            net.leo.mgmod.components.aura_as.MyComponents.AURA_COMPONENT_AS.sync(entity);
+        }
+
+    }
+    public static void onServerTick() {
         // This runs on every server tick
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             // Iterate through all worlds on the server
             for (ServerWorld world : server.getWorlds()) {
 
-                // Iterate through all players in the world
-                for (ServerPlayerEntity player : world.getPlayers()) {
+                Box detection_box = new Box(1000, 10, 1000, -1000, -10, -1000);
 
-                    float trueAuraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
-                    player.getComponent(AURA_COMPONENT_AS).updateTrueAura(trueAuraValue);
+                List<ArmorStandEntity> world_armorstand_entities = world.getEntitiesByClass(ArmorStandEntity.class, detection_box, armorStand -> true);
 
-                    float max_aura_radius = 8;
+                // Iterate through all armorstands in the world (radius)
+                for (ArmorStandEntity fake_player : world_armorstand_entities) {
 
-                    Box near_as_box = new Box(player.getX() - max_aura_radius, player.getY() - max_aura_radius, player.getZ() - max_aura_radius,
-                            player.getX() + max_aura_radius, player.getY() + max_aura_radius, player.getZ() + max_aura_radius);
+                    float true_aura_value = fake_player.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS(fake_player);
+                    fake_player.getComponent(AURA_COMPONENT_AS).updateTrueAura(true_aura_value);
 
-                    List<ArmorStandEntity> nearAS = world.getEntitiesByClass(ArmorStandEntity.class, near_as_box, armorStand -> true);
+                    float effect_radius = true_aura_value;
 
-                    if(nearAS.isEmpty()) {
-                        System.out.println("Not detecting");
-                        player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(trueAuraValue);
+                    Box near_as_box = new Box(fake_player.getX() - effect_radius, fake_player.getY() - effect_radius, fake_player.getZ() - effect_radius,
+                            fake_player.getX() + effect_radius, fake_player.getY() + effect_radius, fake_player.getZ() + effect_radius);
+
+                    List<ServerPlayerEntity> nearPlayer = world.getPlayers();
+
+                    if(nearPlayer.isEmpty()) {
+                        System.out.println("Not detecting_AS");
+                        fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(true_aura_value);
                     }
 
-                    for(ArmorStandEntity fakePlayer : nearAS) {
-                        System.out.println("Detecting");
-                        float fake_player_true_aura_value = fakePlayer.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS(world, fakePlayer);
-                        fakePlayer.getComponent(AURA_COMPONENT_AS).updateTrueAura(fake_player_true_aura_value);
+                    for(ServerPlayerEntity outsider : nearPlayer) {
+                        System.out.println("Detecting_AS");
                         // Perform the aura calculation and update the player's aura component
 
-                        if(fakePlayer.getComponent(AURA_COMPONENT_AS).getTrueAura() <= player.distanceTo(fakePlayer)) {
-                            System.out.println("Not reaching");
-                            float auraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
-                            player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue);
+                        if(fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura() <= outsider.distanceTo(outsider)) {
+                            System.out.println("Not reaching_AS");
+                            float auraValue = fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura();
+                            fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue);
                         }
 
                         else {
                             System.out.println("Reaching");
 
-                            float currentAuraValue = player.getComponent(AURA_COMPONENT_AS).calculateTrueAura(world, player);
-                            player.getComponent(AURA_COMPONENT_AS).updateTrueAura(currentAuraValue);
-
-                            float auraValue = player.getComponent(AURA_COMPONENT_AS).calculateCurrentAura(world, player, fakePlayer);
-                            player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue); //auraValue
+                            float auraValue = fake_player.getComponent(AURA_COMPONENT_AS).calculateCurrentAuraAS(outsider);
+                            fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue); //auraValue
                         }
 
                         // Sync the component to ensure the aura value is updated on the client
-                        MyComponents.AURA_COMPONENT_AS.sync(player);
+                        MyComponents.AURA_COMPONENT_AS.sync(fake_player);
                     }
                 }
             }

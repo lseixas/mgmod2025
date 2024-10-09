@@ -22,13 +22,10 @@ public interface AuraComponentAS extends ComponentV3 {
 
     void updateCurrentAura(float value);
 
-    float calculateTrueAuraAS(World world, ArmorStandEntity fakePlayer);
+    float calculateTrueAuraAS(ArmorStandEntity fakePlayer);
 
     float calculateCurrentAuraAS(PlayerEntity outsider);
 
-    float calculateTrueAura(World world, PlayerEntity player);
-
-    float calculateCurrentAura(World world, PlayerEntity player, ArmorStandEntity fakePlayer);
 }
 
 class TotalAuraComponentAS implements AuraComponentAS {
@@ -46,7 +43,7 @@ class TotalAuraComponentAS implements AuraComponentAS {
 
     @Override public void updateCurrentAura(float value) { this.current_aura = value; }
 
-    @Override public float calculateTrueAuraAS(World world, ArmorStandEntity fakePlayer) {
+    @Override public float calculateTrueAuraAS(ArmorStandEntity fakePlayer) {
         float total = 0.0f;
         for (ItemStack armorStack : fakePlayer.getArmorItems()) {
             if (armorStack.getItem() instanceof ArmorItem armorItem) {
@@ -73,35 +70,7 @@ class TotalAuraComponentAS implements AuraComponentAS {
                 }
             }
         }
-        return total;
-    }
-
-    @Override public float calculateTrueAura(World world, PlayerEntity player) {
-        float total = 0.0f;
-        for (ItemStack armorStack : player.getArmorItems()) {
-            if (armorStack.getItem() instanceof ArmorItem armorItem) {
-                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
-                    // If it's diamond armor, increment the aura counter
-                    total += 1.5f;
-                }
-            }
-        }
-        return total;
-    }
-
-    @Override public float calculateCurrentAura(World world, PlayerEntity player, ArmorStandEntity fakePlayer) {
-
-        float total = this.getTrueAura();
-
-        for (ItemStack armorStack : fakePlayer.getArmorItems()) {
-            if(armorStack.getItem() instanceof ArmorItem armorItem) {
-                if(armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //change to netherdiamond
-                    total -= 1.5f;
-                }
-            }
-        }
-
-        return total;
+        return total + this.getTrueAura();
     }
 
     @Override

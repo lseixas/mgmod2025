@@ -79,7 +79,7 @@ class TotalAuraComponent implements AuraComponent {
                 }
             }
         }
-        return total;
+        return total + this.getCurrentAura();
     }
 
     @Override

@@ -2,14 +2,13 @@ package net.leo.mgmod;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.leo.mgmod.components.aura_as.AuraTickHandler;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.leo.mgmod.components.aura_player.AuraTickHandler;
 import net.leo.mgmod.item.ModItemGroups;
 import net.leo.mgmod.item.ModItems;
 
 import net.leo.mgmod.particles.ModParticles;
 
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.PigEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +23,9 @@ public class MineguerraMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModParticles.registerModParticles();
 
-		AuraTickHandler.register();
+		AuraTickHandler.onServerTick();
+
+		ServerEntityEvents.EQUIPMENT_CHANGE.register(AuraTickHandler::onEquipmentChange);
 
 	}
 
