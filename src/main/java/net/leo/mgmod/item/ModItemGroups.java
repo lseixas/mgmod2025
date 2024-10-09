@@ -19,6 +19,7 @@ public class ModItemGroups {
                         entries.add(ModItems.DIAMANITE);
                         entries.add(ModItems.NETHERDIAMOND);
                         entries.add(ModItems.AURA_DETECTOR);
+                        entries.add(ModItems.DIAMANITE_CHESTPLATE);
                     })
                     .build());
 
