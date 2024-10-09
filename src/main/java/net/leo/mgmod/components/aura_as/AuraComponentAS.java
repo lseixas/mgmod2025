@@ -7,8 +7,9 @@ import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.world.World;
 import org.ladysnake.cca.api.v3.component.ComponentV3;
+
+import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
 
 public interface AuraComponentAS extends ComponentV3 {
 
@@ -50,27 +51,18 @@ class TotalAuraComponentAS implements AuraComponentAS {
                 if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
                     total += 1.5f;
                 }
+                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //netherdiamond
+                    total -= 1.5f;
+                }
             }
         }
         return total;
     }
 
     @Override public float calculateCurrentAuraAS(PlayerEntity outsider) {
-        float total = this.getTrueAura();
 
-        for (ItemStack armorStack : outsider.getArmorItems()) {
-            if (armorStack.getItem() instanceof ArmorItem armorItem) {
+        return this.getTrueAura() + outsider.getComponent(AURA_COMPONENT).getTrueAura();
 
-                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //change to diamanite
-                    total += 1.5f;
-                }
-
-                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //change to netherdiamond
-                    total -= 1.5f;
-                }
-            }
-        }
-        return total + this.getTrueAura();
     }
 
     @Override

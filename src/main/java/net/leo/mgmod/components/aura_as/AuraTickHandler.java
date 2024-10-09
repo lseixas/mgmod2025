@@ -58,9 +58,6 @@ public class AuraTickHandler {
 
                     float effect_radius = true_aura_value;
 
-                    Box near_as_box = new Box(fake_player.getX() - effect_radius, fake_player.getY() - effect_radius, fake_player.getZ() - effect_radius,
-                            fake_player.getX() + effect_radius, fake_player.getY() + effect_radius, fake_player.getZ() + effect_radius);
-
                     List<ServerPlayerEntity> nearPlayer = world.getPlayers();
 
                     if(nearPlayer.isEmpty()) {
@@ -72,7 +69,7 @@ public class AuraTickHandler {
                         System.out.println("Detecting_AS");
                         // Perform the aura calculation and update the player's aura component
 
-                        if(fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura() <= outsider.distanceTo(outsider)) {
+                        if(fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura() < outsider.distanceTo(outsider)) {
                             System.out.println("Not reaching_AS");
                             float auraValue = fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura();
                             fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue);

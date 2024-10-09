@@ -24,8 +24,10 @@ public class MineguerraMod implements ModInitializer {
 		ModParticles.registerModParticles();
 
 		AuraTickHandler.onServerTick();
+		net.leo.mgmod.components.aura_as.AuraTickHandler.onServerTick();
 
 		ServerEntityEvents.EQUIPMENT_CHANGE.register(AuraTickHandler::onEquipmentChange);
+		ServerEntityEvents.EQUIPMENT_CHANGE.register(net.leo.mgmod.components.aura_as.AuraTickHandler::onEquipmentChange);
 
 	}
 

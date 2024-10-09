@@ -50,7 +50,8 @@ public class AuraTickHandler {
                     Box near_player_box = new Box(player.getX() - detection_radius, player.getY() - detection_radius, player.getZ() - detection_radius,
                             player.getX() + detection_radius, player.getY() + detection_radius, player.getZ() + detection_radius);
 
-                    List<PlayerEntity> players = world.getEntitiesByClass(PlayerEntity.class, near_player_box, armorStand -> true);
+                    List<PlayerEntity> players = world.getEntitiesByClass(PlayerEntity.class, near_player_box, player_arr -> false);
+                    players.remove(player);
 
                     if(players.isEmpty()) {
                         float true_aura = player.getComponent(AURA_COMPONENT).getTrueAura();
@@ -70,7 +71,7 @@ public class AuraTickHandler {
                             else {
                                 System.out.println("Reaching");
 
-                                float aura_value = player.getComponent(AURA_COMPONENT).calculateCurrentAura(player, outsider);
+                                float aura_value = player.getComponent(AURA_COMPONENT).calculateCurrentAura(outsider);
                                 player.getComponent(AURA_COMPONENT).updateCurrentAura(aura_value); //auraValue
 
                             }
