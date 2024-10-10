@@ -2,12 +2,16 @@ package net.leo.mgmod;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.leo.mgmod.components.aura_player.AuraTickHandler;
 import net.leo.mgmod.item.ModItemGroups;
 import net.leo.mgmod.item.ModItems;
-import net.leo.mgmod.item.custom.AuraDetectorItem;
+
+import net.leo.mgmod.particles.ModParticles;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class MineguerraMod implements ModInitializer {
 	public static final String MOD_ID = "mgmod";
@@ -17,6 +21,14 @@ public class MineguerraMod implements ModInitializer {
 	public void onInitialize() {
 		ModItemGroups.registerItemsGroups();
 		ModItems.registerModItems();
-		AuraDetectorItem.auraDisplayer();
+		ModParticles.registerModParticles();
+
+		AuraTickHandler.onServerTick();
+		net.leo.mgmod.components.aura_as.AuraTickHandler.onServerTick();
+
+		ServerEntityEvents.EQUIPMENT_CHANGE.register(AuraTickHandler::onEquipmentChange);
+		ServerEntityEvents.EQUIPMENT_CHANGE.register(net.leo.mgmod.components.aura_as.AuraTickHandler::onEquipmentChange);
+
 	}
+
 }

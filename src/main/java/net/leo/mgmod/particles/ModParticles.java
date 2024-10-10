@@ -1,38 +1,30 @@
-package net.leo.mgmod;
+package net.leo.mgmod.particles;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.leo.mgmod.particles.ModParticles;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.leo.mgmod.MineguerraMod;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.particle.FishingParticle;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.concurrent.atomic.AtomicInteger;
+public class ModParticles {
 
-public class MineguerraModClient implements ClientModInitializer{
-    int tickCounter = 1;
-    @Override
-    public void onInitializeClient() {
-        ParticleFactoryRegistry.getInstance().register(ModParticles.AURA_PARTICLE, FishingParticle.Factory::new);
+    public static final SimpleParticleType AURA_PARTICLE = FabricParticleTypes.simple();
 
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            PlayerEntity player = MinecraftClient.getInstance().player;
-            if (player != null) {
-                // Gera partículas ao redor do player
-                tickCounter += 1;
-                if(tickCounter > 40) {
-                    spawnParaboloidParticles(player);
-                    tickCounter = 0;
-                }
-            }
-        });
 
+    public static void registerModParticles() {
+        MineguerraMod.LOGGER.info("registrando particulas, espera ae tio!");
+
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MineguerraMod.MOD_ID, "aura_particle"), AURA_PARTICLE);
     }
-
 
     private void spawnParaboloidParticles(PlayerEntity player) {
         Vec3d playerPos = player.getPos();  // Get player's current position
