@@ -22,6 +22,18 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
 
+    public static final Item DIAMANITE_HELMET = registerItem("diamanite_helmet",
+            new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
+
+    public static final Item DIAMANITE_LEGGINGS = registerItem("diamanite_leggings.json",
+            new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+
+    public static final Item DIAMANITE_BOOTS = registerItem("diamanite_boots",
+            new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MineguerraMod.MOD_ID, name), item);
@@ -38,7 +50,10 @@ public class ModItems {
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
+            entries.add(DIAMANITE_HELMET);
             entries.add(DIAMANITE_CHESTPLATE);
+            entries.add(DIAMANITE_LEGGINGS);
+            entries.add(DIAMANITE_BOOTS);
         });
     }
 }

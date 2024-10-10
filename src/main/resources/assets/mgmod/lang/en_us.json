@@ -4,6 +4,11 @@
   "item.mgmod.nether_diamond": "Nether Diamond",
 
   "item.mgmod.mg_ingots_tab": "MG Ingots",
+  "item.mgmod.mg_armor_tab": "MG Armor",
 
-  "item.mgmod.diamanite_chestplate": "Diamanite Chestplate"
+  "item.mgmod.diamanite_helmet": "Diamanite Helmet",
+  "item.mgmod.diamanite_chestplate": "Diamanite Chestplate",
+  "item.mgmod.diamanite_leggings": "Diamanite Leggings",
+  "item.mgmod.diamanite_boots": "Diamanite Boots"
+
 }

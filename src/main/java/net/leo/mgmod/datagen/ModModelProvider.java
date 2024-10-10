@@ -20,6 +20,10 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DIAMANITE_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.DIAMANITE_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DIAMANITE_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DIAMANITE_BOOTS));
+
     }
 }

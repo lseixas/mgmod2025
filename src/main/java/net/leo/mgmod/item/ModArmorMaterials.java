@@ -35,7 +35,6 @@ public class ModArmorMaterials {
         return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(MineguerraMod.MOD_ID, name), material.get());
 
 
-
     }
 
 }

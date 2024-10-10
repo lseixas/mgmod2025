@@ -6,11 +6,10 @@ import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
 import org.ladysnake.cca.api.v3.component.ComponentV3;
 
 import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
+import net.leo.mgmod.item.ModArmorMaterials;
 
 public interface AuraComponent extends ComponentV3 {
 
@@ -50,7 +49,7 @@ class TotalAuraComponent implements AuraComponent {
         float total = 0.0f;
         for (ItemStack armorStack : player.getArmorItems()) {
             if (armorStack.getItem() instanceof ArmorItem armorItem) {
-                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) { //diamanite
+                if (armorItem.getMaterial() == ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL) { //diamanite
                     // If it's diamond armor, increment the aura counter
                     total += 1.5f;
                 }

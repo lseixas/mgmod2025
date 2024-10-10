@@ -16,7 +16,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
-                .add(ModItems.DIAMANITE_CHESTPLATE);
+                .add(ModItems.DIAMANITE_CHESTPLATE)
+                .add(ModItems.DIAMANITE_HELMET)
+                .add(ModItems.DIAMANITE_BOOTS)
+                .add(ModItems.DIAMANITE_LEGGINGS);
+
     }
 
 }
