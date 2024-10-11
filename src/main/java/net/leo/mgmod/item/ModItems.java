@@ -26,7 +26,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
                     .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
 
-    public static final Item DIAMANITE_LEGGINGS = registerItem("diamanite_leggings.json",
+    public static final Item DIAMANITE_LEGGINGS = registerItem("diamanite_leggings",
             new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
 

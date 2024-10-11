@@ -1,5 +1,6 @@
 package net.leo.mgmod.components.aura_as;
 
+import net.leo.mgmod.item.ModArmorMaterials;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
@@ -48,7 +49,7 @@ class TotalAuraComponentAS implements AuraComponentAS {
         float total = 0.0f;
         for (ItemStack armorStack : fakePlayer.getArmorItems()) {
             if (armorStack.getItem() instanceof ArmorItem armorItem) {
-                if (armorItem.getMaterial() == ArmorMaterials.DIAMOND) {
+                if (armorItem.getMaterial() == ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL) {
                     total += 1.5f;
                 }
                 if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //netherdiamond

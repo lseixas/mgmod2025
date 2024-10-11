@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.leo.mgmod.components.aura_player.AuraTickHandler;
+import net.leo.mgmod.enchantment.ModEnchantments;
 import net.leo.mgmod.item.ModItemGroups;
 import net.leo.mgmod.item.ModItems;
 
@@ -22,6 +23,8 @@ public class MineguerraMod implements ModInitializer {
 		ModItemGroups.registerItemsGroups();
 		ModItems.registerModItems();
 		ModParticles.registerModParticles();
+
+		ModEnchantments.load();
 
 		AuraTickHandler.onServerTick();
 		net.leo.mgmod.components.aura_as.AuraTickHandler.onServerTick();
