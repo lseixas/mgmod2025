@@ -18,6 +18,9 @@ public class ModItems {
     public static final Item NETHERDIAMOND = registerItem("nether_diamond", new Item(new Item.Settings()));
     public static final Item AURA_DETECTOR = registerItem("aura_detector", new AuraDetectorItem(new Item.Settings()));
 
+
+    //Armor
+
     public static final Item DIAMANITE_CHESTPLATE = registerItem("diamanite_chestplate",
             new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
@@ -34,6 +37,22 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
+    public static final Item NETHER_DIAMOND_CHESTPLATE = registerItem("nether_diamond_chestplate",
+            new ArmorItem(ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
+
+    public static final Item NETHER_DIAMOND_HELMET = registerItem("nether_diamond_helmet",
+            new ArmorItem(ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
+
+    public static final Item NETHER_DIAMOND_LEGGINGS = registerItem("nether_diamond_leggings",
+            new ArmorItem(ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+
+    public static final Item NETHER_DIAMOND_BOOTS = registerItem("nether_diamond_boots",
+            new ArmorItem(ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
+    //
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MineguerraMod.MOD_ID, name), item);

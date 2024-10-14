@@ -28,6 +28,17 @@ public class ModArmorMaterials {
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.DIAMANITE),
                     List.of(new ArmorMaterial.Layer(Identifier.of(MineguerraMod.MOD_ID, "diamanite"))), 0, 0));
 
+    public static final RegistryEntry<ArmorMaterial> NETHER_DIAMOND_ARMOR_MATERIAL = registerArmorMaterial("nether_diamond",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 2);
+                map.put(ArmorItem.Type.LEGGINGS, 4);
+                map.put(ArmorItem.Type.CHESTPLATE, 6);
+                map.put(ArmorItem.Type.HELMET, 2);
+                map.put(ArmorItem.Type.BODY, 4);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.NETHERDIAMOND),
+                    List.of(new ArmorMaterial.Layer(Identifier.of(MineguerraMod.MOD_ID, "nether_diamond"))), 0, 0));
+
+
 
 
     public static RegistryEntry<ArmorMaterial> registerArmorMaterial(String name, Supplier<ArmorMaterial> material) {

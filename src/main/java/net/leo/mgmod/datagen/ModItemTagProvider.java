@@ -19,7 +19,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.DIAMANITE_CHESTPLATE)
                 .add(ModItems.DIAMANITE_HELMET)
                 .add(ModItems.DIAMANITE_BOOTS)
-                .add(ModItems.DIAMANITE_LEGGINGS);
+                .add(ModItems.DIAMANITE_LEGGINGS)
+
+                .add(ModItems.NETHER_DIAMOND_CHESTPLATE)
+                .add(ModItems.NETHER_DIAMOND_HELMET)
+                .add(ModItems.NETHER_DIAMOND_BOOTS)
+                .add(ModItems.NETHER_DIAMOND_LEGGINGS);
 
     }
 

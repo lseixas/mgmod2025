@@ -25,5 +25,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.DIAMANITE_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.DIAMANITE_BOOTS));
 
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.NETHER_DIAMOND_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.NETHER_DIAMOND_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.NETHER_DIAMOND_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.NETHER_DIAMOND_BOOTS));
+
     }
+
 }
