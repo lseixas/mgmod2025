@@ -58,7 +58,10 @@ public class AuraTickHandler {
                         player.getComponent(AURA_COMPONENT).updateCurrentAura(true_aura);
                     }
 
+                    float outside_aura = 0f;
+
                     for(PlayerEntity outsider : players) {
+
                         if(outsider != player) {
                             System.out.println("Detecting");
 
@@ -70,16 +73,13 @@ public class AuraTickHandler {
 
                             else {
                                 System.out.println("Reaching");
-
-                                float aura_value = player.getComponent(AURA_COMPONENT).calculateCurrentAura(outsider);
-                                player.getComponent(AURA_COMPONENT).updateCurrentAura(aura_value); //auraValue
-
+                                outside_aura += player.getComponent(AURA_COMPONENT).calculateCurrentAura(outsider);
                             }
-
-                            // Sync the component to ensure the aura value is updated on the client
-                            net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT.sync(player);
                         }
                     }
+
+                    player.getComponent(AURA_COMPONENT).updateCurrentAura(outside_aura);
+                    net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT.sync(player);
 
                 }
             }

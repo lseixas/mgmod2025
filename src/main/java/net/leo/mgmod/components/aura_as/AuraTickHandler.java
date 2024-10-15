@@ -43,48 +43,43 @@ public class AuraTickHandler {
     public static void onServerTick() {
         // This runs on every server tick
         ServerTickEvents.END_SERVER_TICK.register(server -> {
-            // Iterate through all worlds on the server
             for (ServerWorld world : server.getWorlds()) {
 
-                Box detection_box = new Box(1000, 10, 1000, -1000, -10, -1000);
+                Box detection_box = new Box(1000, 128, 1000, -1000, -64, -1000);
 
                 List<ArmorStandEntity> world_armorstand_entities = world.getEntitiesByClass(ArmorStandEntity.class, detection_box, armorStand -> true);
 
-                // Iterate through all armorstands in the world (radius)
                 for (ArmorStandEntity fake_player : world_armorstand_entities) {
 
                     float true_aura_value = fake_player.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS(fake_player);
                     fake_player.getComponent(AURA_COMPONENT_AS).updateTrueAura(true_aura_value);
 
-                    float effect_radius = true_aura_value;
+                    float detection_radius = 8f;
 
-                    List<ServerPlayerEntity> nearPlayer = world.getPlayers();
+                    Box near_fake_player_box = new Box(fake_player.getX() - detection_radius, fake_player.getY() - detection_radius, fake_player.getZ() - detection_radius,
+                            fake_player.getX() + detection_radius, fake_player.getY() + detection_radius, fake_player.getZ() + detection_radius);
 
-                    if(nearPlayer.isEmpty()) {
-                        System.out.println("Not detecting_AS");
-                        fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(true_aura_value);
+
+                    List<ArmorStandEntity> near_as_entities = world.getEntitiesByClass(ArmorStandEntity.class, detection_box, armorStand -> true);
+                    near_as_entities.remove(fake_player);
+
+                    float outside_aura = 0f;
+
+                    if(near_as_entities.isEmpty()) {
+                        fake_player.getComponent(AURA_COMPONENT_AS).setCurrentAura(true_aura_value);
                     }
 
-                    for(ServerPlayerEntity outsider : nearPlayer) {
-                        System.out.println("Detecting_AS");
-                        // Perform the aura calculation and update the player's aura component
-
-                        if(fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura() < outsider.distanceTo(outsider)) {
-                            System.out.println("Not reaching_AS");
-                            float auraValue = fake_player.getComponent(AURA_COMPONENT_AS).getTrueAura();
-                            fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue);
+                    for(ArmorStandEntity outsider : near_as_entities) {
+                        float outsider_effect_radius = outsider.getComponent(AURA_COMPONENT_AS).getTrueAura();
+                        if(outsider_effect_radius > fake_player.distanceTo(outsider)) {
+                            outside_aura += outsider.getComponent(AURA_COMPONENT_AS).getTrueAura();
                         }
-
-                        else {
-                            System.out.println("Reaching");
-
-                            float auraValue = fake_player.getComponent(AURA_COMPONENT_AS).calculateCurrentAuraAS(outsider);
-                            fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(auraValue); //auraValue
+                        else{
+                            fake_player.getComponent(AURA_COMPONENT_AS).setCurrentAura(true_aura_value);
                         }
-
-                        // Sync the component to ensure the aura value is updated on the client
-                        MyComponents.AURA_COMPONENT_AS.sync(fake_player);
                     }
+                    fake_player.getComponent(AURA_COMPONENT_AS).updateCurrentAura(outside_aura); //auraValue
+                    MyComponents.AURA_COMPONENT_AS.sync(fake_player);
                 }
             }
         });

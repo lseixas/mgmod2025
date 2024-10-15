@@ -10,6 +10,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import org.ladysnake.cca.api.v3.component.ComponentV3;
 
+import static net.leo.mgmod.components.aura_as.MyComponents.AURA_COMPONENT_AS;
 import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
 
 public interface AuraComponentAS extends ComponentV3 {
@@ -24,9 +25,11 @@ public interface AuraComponentAS extends ComponentV3 {
 
     void updateCurrentAura(float value);
 
+    void setCurrentAura(float value);
+
     float calculateTrueAuraAS(ArmorStandEntity fakePlayer);
 
-    float calculateCurrentAuraAS(PlayerEntity outsider);
+    float calculateCurrentAuraAS(ArmorStandEntity outsider);
 
 }
 
@@ -43,7 +46,9 @@ class TotalAuraComponentAS implements AuraComponentAS {
 
     @Override public void updateTrueAura(float value) { this.true_aura = value; }
 
-    @Override public void updateCurrentAura(float value) { this.current_aura = value; }
+    @Override public void updateCurrentAura(float value) { this.current_aura = this.true_aura + value; }
+
+    @Override public void setCurrentAura(float value) {this.current_aura = value;}
 
     @Override public float calculateTrueAuraAS(ArmorStandEntity fakePlayer) {
         float total = 0.0f;
@@ -52,7 +57,7 @@ class TotalAuraComponentAS implements AuraComponentAS {
                 if (armorItem.getMaterial() == ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL) {
                     total += 1.5f;
                 }
-                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //netherdiamond
+                if (armorItem.getMaterial() == ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL) { //netherdiamond
                     total -= 1.5f;
                 }
             }
@@ -60,9 +65,9 @@ class TotalAuraComponentAS implements AuraComponentAS {
         return total;
     }
 
-    @Override public float calculateCurrentAuraAS(PlayerEntity outsider) {
+    @Override public float calculateCurrentAuraAS(ArmorStandEntity outsider) {
 
-        return this.getTrueAura() + outsider.getComponent(AURA_COMPONENT).getTrueAura();
+        return this.getTrueAura() + outsider.getComponent(AURA_COMPONENT_AS).getTrueAura();
 
     }
 

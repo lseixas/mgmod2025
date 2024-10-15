@@ -53,7 +53,7 @@ class TotalAuraComponent implements AuraComponent {
                     // If it's diamond armor, increment the aura counter
                     total += 1.5f;
                 }
-                if (armorItem.getMaterial() == ArmorMaterials.GOLD) { //netherdiamond
+                if (armorItem.getMaterial() == ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL) { //netherdiamond
                     total -= 1.5f;
                 }
             }

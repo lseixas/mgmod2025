@@ -44,8 +44,13 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.DIAMANITE_LEGGINGS, "Diamanite Leggings");
         translationBuilder.add(ModItems.DIAMANITE_BOOTS, "Diamanite Boots");
 
-        addText(translationBuilder, ModItemGroups.MG_EQUIP_TAB.getDisplayName(), "EQUIPAMENTOS");
-        addText(translationBuilder, ModItemGroups.MG_INGOTS_TAB.getDisplayName(), "MATERIAIS");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_HELMET, "Nether Diamond Helmet");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_CHESTPLATE, "Nether Diamond Chestplate");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_LEGGINGS, "Nether Diamond Leggings");
+        translationBuilder.add(ModItems.DIAMANITE_BOOTS, "Nether Diamond Boots");
+
+        addText(translationBuilder, ModItemGroups.MG_ITEMS_TAB_KEY.getDisplayName(), "Mg Items");
+        addText(translationBuilder, ModItemGroups.MG_AMOR_TAB_KEY.getDisplayName(), "Mg Armor");
 
     }
 }

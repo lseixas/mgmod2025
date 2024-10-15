@@ -11,8 +11,8 @@ import net.minecraft.util.Identifier;
 
 public class ModItemGroups {
 
-    public static final ItemGroup MG_INGOTS_TAB = Registry.register(Registries.ITEM_GROUP,
-            Identifier.of(MineguerraMod.MOD_ID, "mg_ingots_tab"),
+    public static final ItemGroup MG_ITEMS_TAB_KEY = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(MineguerraMod.MOD_ID, "mg_items"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.V1N3X))
                     .displayName(Text.translatable("itemgroup.mgmod.mg_ingots_tab"))
                     .entries((displayContext, entries) -> {   //ADD ITEMS HERE TO REGISTER IN THE TAB
@@ -22,15 +22,21 @@ public class ModItemGroups {
                     })
                     .build());
 
-    public static final ItemGroup MG_EQUIP_TAB = Registry.register(Registries.ITEM_GROUP,
-            Identifier.of(MineguerraMod.MOD_ID, "mg_armor_tab"),
+    public static final ItemGroup MG_AMOR_TAB_KEY = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(MineguerraMod.MOD_ID, "mg_armor"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.DIAMANITE_CHESTPLATE))
                     .displayName(Text.translatable("itemgroup.mgmod.mg_armor_tab"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModItems.DIAMANITE_CHESTPLATE);
                         entries.add(ModItems.DIAMANITE_HELMET);
+                        entries.add(ModItems.DIAMANITE_CHESTPLATE);
                         entries.add(ModItems.DIAMANITE_LEGGINGS);
                         entries.add(ModItems.DIAMANITE_BOOTS);
+
+                        entries.add(ModItems.NETHER_DIAMOND_HELMET);
+                        entries.add(ModItems.NETHER_DIAMOND_CHESTPLATE);
+                        entries.add(ModItems.NETHER_DIAMOND_LEGGINGS);
+                        entries.add(ModItems.NETHER_DIAMOND_BOOTS);
+
                     })
                     .build());
 
