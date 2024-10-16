@@ -1,5 +1,6 @@
 package net.leo.mgmod.item;
 
+import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.leo.mgmod.MineguerraMod;
 import net.minecraft.item.ItemGroup;
@@ -16,9 +17,9 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.V1N3X))
                     .displayName(Text.translatable("itemgroup.mgmod.mg_ingots_tab"))
                     .entries((displayContext, entries) -> {   //ADD ITEMS HERE TO REGISTER IN THE TAB
-                        entries.add(ModItems.DIAMANITE);
+                        entries.add(ModItems.DIAMANITE_BULLION);
                         entries.add(ModItems.NETHERDIAMOND);
-                        entries.add(ModItems.AURA_DETECTOR);
+                        entries.add(ModItems.V1N3X);
                     })
                     .build());
 
@@ -36,6 +37,22 @@ public class ModItemGroups {
                         entries.add(ModItems.NETHER_DIAMOND_CHESTPLATE);
                         entries.add(ModItems.NETHER_DIAMOND_LEGGINGS);
                         entries.add(ModItems.NETHER_DIAMOND_BOOTS);
+
+                    })
+                    .build());
+
+    public static final ItemGroup MG_TOOLS_TAB_KEY = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(MineguerraMod.MOD_ID, "mg_tools"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.DIAMANITE_SWORD))
+                    .displayName(Text.translatable("itemgroup.mgmod.mg_armor_tab"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(ModItems.AURA_DETECTOR);
+
+                        entries.add(ModItems.DIAMANITE_SWORD);
+                        entries.add(ModItems.DIAMANITE_PICKAXE);
+                        entries.add(ModItems.DIAMANITE_AXE);
+                        entries.add(ModItems.DIAMANITE_SHOVEL);
+                        entries.add(ModItems.DIAMANITE_HOE);
 
                     })
                     .build());

@@ -34,10 +34,22 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
 
+        //Enchantments
+
         translationBuilder.addEnchantment(ModEnchantments.ECSTASY_KEY, "Ecstasy");
-        translationBuilder.add(ModItems.DIAMANITE, "Diamanite");
+
+        //Enchantments
+
+        //Items
+
+        translationBuilder.add(ModItems.DIAMANITE_BULLION, "Diamanite Bullion");
         translationBuilder.add(ModItems.V1N3X, "V1N3X");
         translationBuilder.add(ModItems.NETHERDIAMOND, "Nether Diamond");
+        translationBuilder.add(ModItems.AURA_DETECTOR, "Aura Detector");
+
+        //Items
+
+        //Armor
 
         translationBuilder.add(ModItems.DIAMANITE_HELMET, "Diamanite Helmet");
         translationBuilder.add(ModItems.DIAMANITE_CHESTPLATE, "Diamanite Chestplate");
@@ -49,8 +61,25 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.NETHER_DIAMOND_LEGGINGS, "Nether Diamond Leggings");
         translationBuilder.add(ModItems.DIAMANITE_BOOTS, "Nether Diamond Boots");
 
+        //Armor
+
+        //Tools
+
+        translationBuilder.add(ModItems.DIAMANITE_SWORD, "Diamanite Sword");
+        translationBuilder.add(ModItems.DIAMANITE_PICKAXE, "Diamanite Pickaxe");
+        translationBuilder.add(ModItems.DIAMANITE_AXE, "Diamanite Axe");
+        translationBuilder.add(ModItems.DIAMANITE_SHOVEL, "Diamanite Shovel");
+        translationBuilder.add(ModItems.DIAMANITE_HOE, "Diamanite Hoe");
+
+        //Tools
+
+        //Item tabs
+
         addText(translationBuilder, ModItemGroups.MG_ITEMS_TAB_KEY.getDisplayName(), "Mg Items");
         addText(translationBuilder, ModItemGroups.MG_AMOR_TAB_KEY.getDisplayName(), "Mg Armor");
+        addText(translationBuilder, ModItemGroups.MG_TOOLS_TAB_KEY.getDisplayName(), "Mg Tools");
+
+        //Item tabs
 
     }
 }
