@@ -73,6 +73,11 @@ public class ModItems {
             entries.add(DIAMANITE_CHESTPLATE);
             entries.add(DIAMANITE_LEGGINGS);
             entries.add(DIAMANITE_BOOTS);
+
+            entries.add(NETHER_DIAMOND_HELMET);
+            entries.add(NETHER_DIAMOND_CHESTPLATE);
+            entries.add(NETHER_DIAMOND_LEGGINGS);
+            entries.add(NETHER_DIAMOND_BOOTS);
         });
     }
 }

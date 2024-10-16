@@ -44,42 +44,36 @@ public class AuraTickHandler {
                 // Iterate through all players in the world
                 for (ServerPlayerEntity player : world.getPlayers()) {
 
-                    float aura_radius = player.getComponent(AURA_COMPONENT).getTrueAura();
-                    float detection_radius = 8;
+                    float player_true_aura = player.getComponent(AURA_COMPONENT).getTrueAura();
+                    float detection_radius = 8f;
 
                     Box near_player_box = new Box(player.getX() - detection_radius, player.getY() - detection_radius, player.getZ() - detection_radius,
                             player.getX() + detection_radius, player.getY() + detection_radius, player.getZ() + detection_radius);
 
-                    List<PlayerEntity> players = world.getEntitiesByClass(PlayerEntity.class, near_player_box, player_arr -> false);
-                    players.remove(player);
+                    List<PlayerEntity> near_players = world.getEntitiesByClass(PlayerEntity.class, near_player_box, player_arr -> false);
+                    near_players.remove(player);
 
-                    if(players.isEmpty()) {
-                        float true_aura = player.getComponent(AURA_COMPONENT).getTrueAura();
-                        player.getComponent(AURA_COMPONENT).updateCurrentAura(true_aura);
+                    if(near_players.isEmpty()) {
+                        player.getComponent(AURA_COMPONENT).setCurrentAura(player_true_aura);
                     }
 
                     float outside_aura = 0f;
 
-                    for(PlayerEntity outsider : players) {
+                    for(PlayerEntity outsider : near_players) {
 
-                        if(outsider != player) {
-                            System.out.println("Detecting");
+                        float outsider_true_aura = outsider.getComponent(AURA_COMPONENT).getTrueAura();
+                        float outsider_effect_radius = outsider_true_aura;
 
-                            if(aura_radius <= outsider.distanceTo(player)) {
-                                System.out.println("Not reaching");
-                                float true_aura = player.getComponent(AURA_COMPONENT).calculateTrueAura(player);
-                                player.getComponent(AURA_COMPONENT).updateCurrentAura(true_aura);
-                            }
-
-                            else {
-                                System.out.println("Reaching");
-                                outside_aura += player.getComponent(AURA_COMPONENT).calculateCurrentAura(outsider);
-                            }
+                        if(outsider_effect_radius > player.distanceTo(outsider)) {
+                            outside_aura += outsider_true_aura;
+                        }
+                        else {
+                            player.getComponent(AURA_COMPONENT).setCurrentAura(player_true_aura);
                         }
                     }
-
                     player.getComponent(AURA_COMPONENT).updateCurrentAura(outside_aura);
-                    net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT.sync(player);
+                    AURA_COMPONENT.sync(player);
+
 
                 }
             }

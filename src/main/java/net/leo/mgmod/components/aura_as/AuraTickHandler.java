@@ -28,12 +28,10 @@ public class AuraTickHandler {
                 if(!oldStack.isEmpty() && newStack.isEmpty()) {
                     float true_aura = entity.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS((ArmorStandEntity) entity);
                     entity.getComponent(AURA_COMPONENT_AS).updateTrueAura(true_aura);
-                    System.out.println("Updated unequip");
                 }
                 else if (oldStack.isEmpty() && !newStack.isEmpty()) {
                     float true_aura = entity.getComponent(AURA_COMPONENT_AS).calculateTrueAuraAS((ArmorStandEntity) entity);
                     entity.getComponent(AURA_COMPONENT_AS).updateTrueAura(true_aura);
-                    System.out.println("Updated unequip");
                 }
             }
             net.leo.mgmod.components.aura_as.MyComponents.AURA_COMPONENT_AS.sync(entity);
@@ -60,7 +58,7 @@ public class AuraTickHandler {
                             fake_player.getX() + detection_radius, fake_player.getY() + detection_radius, fake_player.getZ() + detection_radius);
 
 
-                    List<ArmorStandEntity> near_as_entities = world.getEntitiesByClass(ArmorStandEntity.class, detection_box, armorStand -> true);
+                    List<ArmorStandEntity> near_as_entities = world.getEntitiesByClass(ArmorStandEntity.class, near_fake_player_box, armorStand -> true);
                     near_as_entities.remove(fake_player);
 
                     float outside_aura = 0f;

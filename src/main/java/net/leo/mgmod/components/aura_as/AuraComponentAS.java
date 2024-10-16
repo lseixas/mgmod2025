@@ -15,8 +15,6 @@ import static net.leo.mgmod.components.aura_player.MyComponents.AURA_COMPONENT;
 
 public interface AuraComponentAS extends ComponentV3 {
 
-    void incrementTrueAura();
-
     float getTrueAura();
 
     float getCurrentAura();
@@ -29,16 +27,12 @@ public interface AuraComponentAS extends ComponentV3 {
 
     float calculateTrueAuraAS(ArmorStandEntity fakePlayer);
 
-    float calculateCurrentAuraAS(ArmorStandEntity outsider);
-
 }
 
 class TotalAuraComponentAS implements AuraComponentAS {
 
     private float true_aura = 0;
     private float current_aura = 0;
-
-    @Override public void incrementTrueAura() { this.true_aura++; }
 
     @Override public float getTrueAura() { return true_aura; }
 
@@ -65,11 +59,6 @@ class TotalAuraComponentAS implements AuraComponentAS {
         return total;
     }
 
-    @Override public float calculateCurrentAuraAS(ArmorStandEntity outsider) {
-
-        return this.getTrueAura() + outsider.getComponent(AURA_COMPONENT_AS).getTrueAura();
-
-    }
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {

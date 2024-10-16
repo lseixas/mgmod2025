@@ -13,8 +13,6 @@ import net.leo.mgmod.item.ModArmorMaterials;
 
 public interface AuraComponent extends ComponentV3 {
 
-    void incrementTrueAura();
-
     float getTrueAura();
 
     float getCurrentAura();
@@ -23,9 +21,9 @@ public interface AuraComponent extends ComponentV3 {
 
     void updateCurrentAura(float value);
 
-    float calculateTrueAura(PlayerEntity player);
+    void setCurrentAura(float value);
 
-    float calculateCurrentAura(PlayerEntity outsider);
+    float calculateTrueAura(PlayerEntity player);
 
 }
 
@@ -34,15 +32,15 @@ class TotalAuraComponent implements AuraComponent {
     private float true_aura = 0;
     private float current_aura = 0;
 
-    @Override public void incrementTrueAura() { this.true_aura++; }
-
     @Override public float getTrueAura() { return true_aura; }
 
     @Override public float getCurrentAura() { return current_aura; }
 
     @Override public void updateTrueAura(float value) { this.true_aura = value; }
 
-    @Override public void updateCurrentAura(float value) { this.current_aura = value; }
+    @Override public void updateCurrentAura(float value) { this.current_aura = this.true_aura + value; }
+
+    @Override public void setCurrentAura(float value) { this.current_aura = value; }
 
     @Override
     public float calculateTrueAura(PlayerEntity player) {
@@ -59,13 +57,6 @@ class TotalAuraComponent implements AuraComponent {
             }
         }
         return total;
-    }
-
-    @Override
-    public float calculateCurrentAura(PlayerEntity outsider) {
-
-        return this.getTrueAura() + outsider.getComponent(AURA_COMPONENT).getTrueAura();
-
     }
 
     @Override
