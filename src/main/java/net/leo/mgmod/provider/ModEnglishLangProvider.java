@@ -59,7 +59,7 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.NETHER_DIAMOND_HELMET, "Nether Diamond Helmet");
         translationBuilder.add(ModItems.NETHER_DIAMOND_CHESTPLATE, "Nether Diamond Chestplate");
         translationBuilder.add(ModItems.NETHER_DIAMOND_LEGGINGS, "Nether Diamond Leggings");
-        translationBuilder.add(ModItems.DIAMANITE_BOOTS, "Nether Diamond Boots");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_BOOTS, "Nether Diamond Boots");
 
         //Armor
 

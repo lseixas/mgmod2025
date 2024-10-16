@@ -1,12 +1,23 @@
 {
   "enchantment.mgmod.ecstasy": "Ecstasy",
-  "item.mgmod.diamanite": "Diamanite",
+  "item.mgmod.aura_detector": "Aura Detector",
+  "item.mgmod.diamanite_axe": "Diamanite Axe",
   "item.mgmod.diamanite_boots": "Diamanite Boots",
+  "item.mgmod.diamanite_bullion": "Diamanite Bullion",
   "item.mgmod.diamanite_chestplate": "Diamanite Chestplate",
   "item.mgmod.diamanite_helmet": "Diamanite Helmet",
+  "item.mgmod.diamanite_hoe": "Diamanite Hoe",
   "item.mgmod.diamanite_leggings": "Diamanite Leggings",
+  "item.mgmod.diamanite_pickaxe": "Diamanite Pickaxe",
+  "item.mgmod.diamanite_shovel": "Diamanite Shovel",
+  "item.mgmod.diamanite_sword": "Diamanite Sword",
   "item.mgmod.nether_diamond": "Nether Diamond",
+  "item.mgmod.nether_diamond_boots": "Nether Diamond Boots",
+  "item.mgmod.nether_diamond_chestplate": "Nether Diamond Chestplate",
+  "item.mgmod.nether_diamond_helmet": "Nether Diamond Helmet",
+  "item.mgmod.nether_diamond_leggings": "Nether Diamond Leggings",
   "item.mgmod.v1n3x": "V1N3X",
-  "itemgroup.mgmod.mg_armor_tab": "EQUIPAMENTOS",
-  "itemgroup.mgmod.mg_ingots_tab": "MATERIAIS"
+  "itemgroup.mgmod.mg_armor_tab": "Mg Armor",
+  "itemgroup.mgmod.mg_ingots_tab": "Mg Items",
+  "itemgroup.mgmod.mg_tools_tab": "Mg Tools"
 }

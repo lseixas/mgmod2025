@@ -44,7 +44,7 @@ public class ModItemGroups {
     public static final ItemGroup MG_TOOLS_TAB_KEY = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MineguerraMod.MOD_ID, "mg_tools"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.DIAMANITE_SWORD))
-                    .displayName(Text.translatable("itemgroup.mgmod.mg_armor_tab"))
+                    .displayName(Text.translatable("itemgroup.mgmod.mg_tools_tab"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.AURA_DETECTOR);
 

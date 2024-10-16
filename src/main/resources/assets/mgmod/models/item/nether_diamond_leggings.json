@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "mgmod:item/nether_diamond_leggings"
+  }
+}
