@@ -43,7 +43,7 @@ public class ModItemGroups {
 
     public static final ItemGroup MG_TOOLS_TAB_KEY = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MineguerraMod.MOD_ID, "mg_tools"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.DIAMANITE_SWORD))
+            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.NETHER_DIAMOND_SWORD))
                     .displayName(Text.translatable("itemgroup.mgmod.mg_tools_tab"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.AURA_DETECTOR);
@@ -53,6 +53,12 @@ public class ModItemGroups {
                         entries.add(ModItems.DIAMANITE_AXE);
                         entries.add(ModItems.DIAMANITE_SHOVEL);
                         entries.add(ModItems.DIAMANITE_HOE);
+
+                        entries.add(ModItems.NETHER_DIAMOND_SWORD);
+                        entries.add(ModItems.NETHER_DIAMOND_PICKAXE);
+                        entries.add(ModItems.NETHER_DIAMOND_AXE);
+                        entries.add(ModItems.NETHER_DIAMOND_SHOVEL);
+                        entries.add(ModItems.NETHER_DIAMOND_HOE);
 
                     })
                     .build());

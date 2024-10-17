@@ -10,8 +10,9 @@ public class ModTags {
 
     public static class Blocks {
         public static final TagKey<Block> NEEDS_DIAMANITE_TOOL = createTag("needs_diamanite_tool");
-        public static final TagKey<Block> INCORRECT_FOR_DIAMANITE_TOOL = createTag("incorrect_for_diamanite_tool");
+        public static final TagKey<Block> INCORRECT_FOR_DIAMANITE_TOOL_KEY = createTag("incorrect_for_diamanite_tool");
 
+        public static final TagKey<Block> INCORRECT_FOR_NETHER_DIAMOND_TOOL_KEY = createTag("incorrect_for_diamanite_tool");
     }
 
     private static TagKey<Block> createTag(String name) {

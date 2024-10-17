@@ -3,7 +3,6 @@ package net.leo.mgmod.item;
 import com.google.common.base.Suppliers;
 import net.leo.mgmod.util.ModTags;
 import net.minecraft.block.Block;
-import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.TagKey;
@@ -11,8 +10,11 @@ import net.minecraft.registry.tag.TagKey;
 import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
-    DIAMANITE(ModTags.Blocks.INCORRECT_FOR_DIAMANITE_TOOL,
-              2025, 7.0F, 2.0F, 19, () -> Ingredient.ofItems(ModItems.DIAMANITE_BULLION));
+    DIAMANITE(ModTags.Blocks.INCORRECT_FOR_DIAMANITE_TOOL_KEY,
+              2025, 7.0F, 2.0F, 19, () -> Ingredient.ofItems(ModItems.DIAMANITE_BULLION)),
+    NETHER_DIAMOND(ModTags.Blocks.INCORRECT_FOR_NETHER_DIAMOND_TOOL_KEY,
+            2025, 6.0F, 3.5F, 18, () -> Ingredient.ofItems(ModItems.NETHERDIAMOND));
+
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

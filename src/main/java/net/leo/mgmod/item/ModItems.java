@@ -3,6 +3,7 @@ package net.leo.mgmod.item;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.leo.mgmod.MineguerraMod;
 import net.leo.mgmod.item.custom.AuraDetectorItem;
+import net.leo.mgmod.item.custom.DiamaniteSwordItem;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -13,7 +14,6 @@ public class ModItems {
     public static final Item DIAMANITE_BULLION = registerItem("diamanite_bullion", new Item(new Item.Settings()));
     public static final Item V1N3X = registerItem("v1n3x", new Item(new Item.Settings()));
     public static final Item NETHERDIAMOND = registerItem("nether_diamond", new Item(new Item.Settings()));
-    public static final Item AURA_DETECTOR = registerItem("aura_detector", new AuraDetectorItem(new Item.Settings()));
 
 
     //Armor
@@ -34,6 +34,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.DIAMANITE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
+
     public static final Item NETHER_DIAMOND_CHESTPLATE = registerItem("nether_diamond_chestplate",
             new ArmorItem(ModArmorMaterials.NETHER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
@@ -53,9 +54,15 @@ public class ModItems {
 
     //tools
 
+    public static final Item AURA_DETECTOR = registerItem("aura_detector", new AuraDetectorItem(new Item.Settings()));
+
+//    public static final Item DIAMANITE_SWORD = registerItem("diamanite_sword",
+//            new SwordItem(ModToolMaterials.DIAMANITE, new Item.Settings()
+//                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.DIAMANITE, 3, -2.4f))));
+
     public static final Item DIAMANITE_SWORD = registerItem("diamanite_sword",
-            new SwordItem(ModToolMaterials.DIAMANITE, new Item.Settings()
-                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.DIAMANITE, 3, -2.4f))));
+            new DiamaniteSwordItem(ModToolMaterials.DIAMANITE, new Item.Settings()
+                    .attributeModifiers(DiamaniteSwordItem.createAttributeModifiers(ModToolMaterials.DIAMANITE, 3, -2.4f))));
     public static final Item DIAMANITE_PICKAXE = registerItem("diamanite_pickaxe",
             new PickaxeItem(ModToolMaterials.DIAMANITE, new Item.Settings()
                     .attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.DIAMANITE, 1.0F, -3.0f))));
@@ -69,6 +76,21 @@ public class ModItems {
             new HoeItem(ModToolMaterials.DIAMANITE, new Item.Settings()
                     .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.DIAMANITE, -2.0F, -1.0f))));
 
+    public static final Item NETHER_DIAMOND_SWORD = registerItem("nether_diamond_sword",
+            new SwordItem(ModToolMaterials.NETHER_DIAMOND, new Item.Settings()
+                    .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.NETHER_DIAMOND, 3, -2.45f))));
+    public static final Item NETHER_DIAMOND_PICKAXE = registerItem("nether_diamond_pickaxe",
+            new PickaxeItem(ModToolMaterials.NETHER_DIAMOND, new Item.Settings()
+                    .attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.NETHER_DIAMOND, 1.0F, -3.05f))));
+    public static final Item NETHER_DIAMOND_AXE = registerItem("nether_diamond_axe",
+            new AxeItem(ModToolMaterials.NETHER_DIAMOND, new Item.Settings()
+                    .attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.NETHER_DIAMOND, 6F, -3.5f))));
+    public static final Item NETHER_DIAMOND_SHOVEL = registerItem("nether_diamond_shovel",
+            new ShovelItem(ModToolMaterials.NETHER_DIAMOND, new Item.Settings()
+                    .attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.NETHER_DIAMOND, 1.5f, -3.0f))));
+    public static final Item NETHER_DIAMOND_HOE = registerItem("nether_diamond_hoe",
+            new HoeItem(ModToolMaterials.NETHER_DIAMOND, new Item.Settings()
+                    .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.NETHER_DIAMOND, -2.0f, -1.0f))));
 
     //
 

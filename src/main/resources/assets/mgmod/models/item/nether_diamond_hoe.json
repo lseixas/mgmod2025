@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "mgmod:item/blaze_rod"
+    "layer0": "mgmod:item/nether_diamond_hoe"
   }
 }

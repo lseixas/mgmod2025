@@ -71,6 +71,12 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.DIAMANITE_SHOVEL, "Diamanite Shovel");
         translationBuilder.add(ModItems.DIAMANITE_HOE, "Diamanite Hoe");
 
+        translationBuilder.add(ModItems.NETHER_DIAMOND_SWORD, "Nether Diamond Sword");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_PICKAXE, "Nether Diamond Pickaxe");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_AXE, "Nether Diamond Axe");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_SHOVEL, "Nether Diamond Shovel");
+        translationBuilder.add(ModItems.NETHER_DIAMOND_HOE, "Nether Diamond Hoe");
+
         //Tools
 
         //Item tabs
